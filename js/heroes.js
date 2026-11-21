@@ -1,0 +1,20 @@
+// Données des 5 héros. Stats sur 100. 'arme' = chaîne d'évolution.
+export const HEROES = [
+  { id:'assassin', nom:'Assassin', couleur:'#e0455a', pv:55, atk:72, vit:95, debloque:true,
+    desc:'Deux lames, très rapide, fragile. Esquives et coups critiques.',
+    armes:['Dagues de fer','Lames jumelles','Crocs d\u2019ombre','Lames spectrales'] },
+  { id:'mage', nom:'Mage', couleur:'#4cc9f0', pv:70, atk:70, vit:65, debloque:true,
+    desc:'Bâton et éléments : feu, glace, foudre. Équilibré.',
+    armes:['Bâton de bois','Bâton runique','Sceptre arcanique','Bâton des tempêtes'] },
+  { id:'soldat', nom:'Soldat', couleur:'#f2a541', pv:68, atk:92, vit:55, debloque:true,
+    desc:'Deux pistolets, grosse puissance de feu, vie moyenne.',
+    armes:['Pistolets jumeaux','Mitraillette','Mitrailleuse','Fusil d\u2019assaut'] },
+  { id:'ange', nom:'Ange', couleur:'#ffe9a8', pv:72, atk:85, vit:72, debloque:false,
+    cond:'Terminer le monde 1',
+    desc:'Pouvoirs célestes et lumière : soin, rayons, jugement.',
+    armes:['Lance de lumière','Épée céleste','Arc solaire','Halo sacré'] },
+  { id:'barbare', nom:'Barbare', couleur:'#9b5de5', pv:95, atk:90, vit:45, debloque:false,
+    cond:'Terminer le monde 2',
+    desc:'Force brute du nécromancien : hache d\u2019os, âmes volées.',
+    armes:['Hache d\u2019os','Faux funeste','Marteau des morts','Lame d\u2019âmes'] },
+];
