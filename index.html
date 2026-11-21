@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#0a0f1e">
+<title>LC STUDIO</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app"></div>
+<script>
+// Diagnostic : si le jeu ne démarre pas, affiche l'erreur ou les fichiers manquants
+(function(){
+  var FILES=['style.css','combat.css','gear.css','comp.css','js/main.js','js/splash.js','js/heroes.js','js/portrait.js','js/menu.js','js/save.js',
+    'js/combat/config.js','js/combat/skills.js','js/combat/fx.js','js/combat/scenery.js','js/combat/input.js','js/combat/player.js','js/combat/enemies.js','js/combat/companion.js','js/combat/engine.js',
+    'js/gear/items.js','js/gear/tiers.js','js/gear/actions.js','js/gear/loot.js','js/gear/screen.js',
+    'js/companions/data.js','js/companions/logic.js','js/companions/art.js','js/companions/screen.js'];
+  function show(txt){var d=document.createElement('div');d.style.cssText='position:fixed;left:0;right:0;top:0;z-index:99999;padding:14px;background:#4a1018;color:#fff;font:13px/1.5 monospace;white-space:pre-wrap';d.textContent=txt;d.onclick=function(){d.remove()};document.body.appendChild(d);}
+  window.addEventListener('error',function(e){show('Erreur : '+e.message+(e.filename?'\n'+e.filename+':'+e.lineno:''));});
+  window.addEventListener('unhandledrejection',function(e){show('Erreur : '+(e.reason&&e.reason.message||e.reason));});
+  setTimeout(async function(){
+    if(window.__ok)return;
+    var miss=[];
+    for(var i=0;i<FILES.length;i++){try{var r=await fetch(FILES[i]);if(!r.ok)miss.push(FILES[i]);}catch(x){miss.push(FILES[i]);}}
+    show(miss.length?'Fichiers manquants ou mal placés :\n'+miss.join('\n'):'Le jeu ne démarre pas (voir erreur ci-dessus).');
+  },3000);
+})();
+</script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
