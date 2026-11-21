@@ -33,8 +33,12 @@ export function startCombat(root, o) {
   g.comp = cs.active && cs.owned[cs.active] ? new Companion(cs.active, cs.owned[cs.active], g) : null;
   let s = 1, vw = 640, cam = 0, raf = 0, ovl = null;
 
-  const resize = () => { const r = devicePixelRatio || 1; cv.width = cv.clientWidth * r; cv.height = cv.clientHeight * r; s = cv.height / H; vw = cv.width / s; };
-  addEventListener('resize', resize); resize();
+  cv.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none';
+  const resize = () => {   // taille mesurée sur l'écran de jeu (indépendante du chargement du CSS)
+    const r = devicePixelRatio || 1, w = screen.clientWidth, h = screen.clientHeight; if (!w || !h) return;
+    cv.width = Math.round(w * r); cv.height = Math.round(h * r); s = cv.height / H; vw = cv.width / s;
+  };
+  const ro = new ResizeObserver(resize); ro.observe(screen); resize();
 
   g.areaHit = (cx, cy, r, dmg, opt) => {
     for (const e of g.enemies) {
@@ -149,7 +153,7 @@ export function startCombat(root, o) {
     }, win ? 700 : 1000);
   }
   function exit(silent) {
-    cancelAnimationFrame(raf); removeEventListener('resize', resize); input.destroy(); screen.remove();
+    cancelAnimationFrame(raf); ro.disconnect(); input.destroy(); screen.remove();
     if (silent !== true) o.onExit?.();
   }
 
